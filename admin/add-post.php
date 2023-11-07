@@ -57,11 +57,24 @@
         $post_desc      = $_POST['post_desc'];
         $post_author    = $_POST['post_author'];
 
-        $post_image     = $_POST['image']['name'];
-        $post_image_tmp = $_POST['image']['tmp_name'];
+        $post_image     = $_FILES['image']['name'];
+        $post_image_temp = $_FILES['image']['tmp_name'];
 
         $post_category  = $_POST['post_category'];
         $post_tags      = $_POST['post_tags'];
+
+        move_uploaded_file($post_image_temp, "img/posts/$post_image");
+
+        $query = "INSERT INTO posts ( post_title, post_description, post_author, post_thumb, post_category, post_tags, post_date) VALUES ('$post_title', '$post_desc', '$post_author', '$post_image', '$post_category', '$post_tags', now())";
+
+        $add_new_post = mysqli_query($connect, $query);
+
+        if (!$add_new_post) {
+            die("Query Failed" . mysqli_error($connect));
+        } else {
+            header("Location:allposts.php");
+        }
+
     }
     
     ?>

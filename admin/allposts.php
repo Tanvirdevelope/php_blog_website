@@ -29,6 +29,7 @@
                         <?php
                          $query = "SELECT * FROM posts";
                          $select_all_post = mysqli_query($connect, $query);
+                         $i = 0;
 
                          while( $row = mysqli_fetch_assoc($select_all_post)){
 
@@ -40,9 +41,10 @@
                             $post_category      = $row['post_category'];
                             $post_tags          = $row['post_tags'];
                             $post_date          = $row['post_date'];
+                            $i++;
                             ?>
                             <tr>
-                            <td scope="row"><?php echo $post_id ?></td>
+                            <td scope="row"><?php echo $i ?></td>
                             <td><?php echo $post_title ?></td>
                             <td><?php echo $post_author ?></td>
                             <td><?php echo $post_category ?></td>
